@@ -8,14 +8,13 @@ const useFetch = url => {
 
   const fetchData = async () => {
     try {
-      console.log(url);
       const {data: responseData} = await axios.get(url);
-      JSON.stringify(responseData);
+      console.log(responseData);
       setData(responseData);
-      setLoading(false);
     } catch (err) {
-      setLoading(false);
       setError(err.message);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -24,7 +23,7 @@ const useFetch = url => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  return {error, data, loading};
+  return {data, loading, error};
 };
 
 export default useFetch;
